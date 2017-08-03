@@ -6,7 +6,7 @@
     </div>
     <div class="btn-group">
       <download-button />
-      <span class="button" @click="$store.dispatch('app/toggleProperty', 'importDeck')"><i class="icon icon-upload" data-tooltip="Import deck" data-position="bottom left"></i></span>
+      <span class="button" @click="$store.dispatch('app/toggleProperty', 'importDeck')"><i class="icon icon-upload" data-tooltip="Import/Export Deck" data-position="bottom left"></i></span>
       <deck-options />
       <button class="btn clear-deck" @click="$store.dispatch('cardList/resetAll')"><i class="icon icon-clear-deck"></i> Clear</button>
     </div>
