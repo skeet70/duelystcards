@@ -24,28 +24,33 @@ export const updateHash = ({ general, cards, sideboard = [] }) => {
 };
 
 export const duelystToDuelystCardsHash = (duelystHash) => {
-  duelystHash = duelystHash.replace(/\[(.*?)\]/, '')
-  const cardArray = duelystHash.split(',').map(cardEntry => {
-    const tuple = cardEntry.split(':')
+  let hash = duelystHash;
+  hash = hash.replace(/\[(.*?)\]/, '');
+  const cardArray = hash.split(',').map((cardEntry) => {
+    const tuple = cardEntry.split(':');
 
-    tuple[2] = tuple[1]
-    tuple[1] = 'mainboard'
+    tuple[2] = tuple[1];
+    tuple[1] = 'mainboard';
 
-    return tuple.join(':')
-  })
+    return tuple.join(':');
+  });
 
   // change the general type. It's always the first one in the array.
-  const generalTuple = cardArray[0].split(':')
-  generalTuple[1] = 'general'
-  cardArray[0] = generalTuple.join(':')
+  const generalTuple = cardArray[0].split(':');
+  generalTuple[1] = 'general';
+  cardArray[0] = generalTuple.join(':');
 
-  return btoa(cardArray.join(','))
-}
+  return btoa(cardArray.join(','));
+};
 
-export const duelystCardsToDuelystHash = (duelystCardsHash) => {
-  return btoa(atob(duelystCardsHash).split(',').filter(s => !/sideboard/.test(s)).map(cardTupleString => {
-    const cardTuple = cardTupleString.split(':')
-    cardTuple[1] = cardTuple[2]
-    return cardTuple.splice(0, 2).join(':')
-  }).join(','))
-}
+export const duelystCardsToDuelystHash = duelystCardsHash => btoa(
+    atob(duelystCardsHash)
+      .split(',')
+      .filter(s => !/sideboard/.test(s))
+      .map((cardTupleString) => {
+        const cardTuple = cardTupleString.split(':');
+        cardTuple[1] = cardTuple[2];
+        return cardTuple.splice(0, 2).join(':');
+      })
+      .join(',')
+  );

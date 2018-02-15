@@ -2,10 +2,10 @@
   <general-modal :show="modal" width="500px" :close="closeModal">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/fontawesome.css" rel="stylesheet">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/solid.css" rel="stylesheet">
-    <div class="import-deck-modal">
+    <div class="export-duelystcards-deck-modal">
       <h1>Export Duelystcards Deck</h1>
       <p>Click to copy a shareable URL of your deck!</p>
-      <button @click="copyURI(uri)"><i class="fas fa-copy fa-lg"></i> Copy</button>
+      <button class="success" @click="copyURI()"><i class="fas fa-copy fa-lg"></i> Copy</button>
       <button class="cancel" @click="closeModal()">Close</button>
     </div>
   </general-modal>
@@ -16,12 +16,6 @@ import GeneralModal from 'components/GeneralModal';
 import { mapState, mapActions } from 'vuex';
 
 export default {
-  data() {
-    return {
-      uri: window.location.href
-    };
-  },
-
   computed: {
     ...mapState({ modal: ({ app }) => app.exportDuelystcardsDeck })
   },
@@ -35,7 +29,7 @@ export default {
     },
 
     // from https://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
-    copyURI(text) {
+    copyURI() {
       const ephemeral = document.createElement('textarea');
       ephemeral.style.position = 'fixed';
       ephemeral.style.top = 0;
@@ -48,7 +42,7 @@ export default {
       ephemeral.style.boxShadow = 'none';
       ephemeral.style.background = 'transparent';
 
-      ephemeral.value = text;
+      ephemeral.value = window.location.href;
       document.body.appendChild(ephemeral);
 
       ephemeral.select();
@@ -69,7 +63,7 @@ export default {
 <style lang="sass">
   @import '../css/includes';
 
-  .import-deck-modal {
+  .export-duelystcards-deck-modal {
     padding: 30px;
 
     > .input {
@@ -97,25 +91,3 @@ export default {
     background: $gray-dark;
   }
 </style>
-
-function() {
-    var e = {}
-      , t = this.model.get("cards")
-      , n = 1;
-    for (var r in t) {
-        var i = t[r].id;
-        i = d.getBaseCardId(i);
-        var s = a.CardFactory.cardForIdentifier(i, a.GameSession.getInstance());
-        s.getType() === a.CardType.Unit && s.getIsGeneral() ? n = i : e[i] ? e[i]++ : e[i] = 1
-    }
-    if (n) {
-        var o = "1:" + n;
-        for (var l in e)
-            o += ",",
-            o += e[l] + ":" + l;
-        var c = btoa(o);
-        this.ui.$deckCardIds.val("[" + this.model.get("name") + "]" + c).popover({
-            trigger: "focus"
-        }).focus().select()
-    }
-}

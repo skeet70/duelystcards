@@ -1,6 +1,6 @@
 <template>
   <general-modal :show="modal" width="500px" :close="closeModal">
-    <div class="import-deck-modal">
+    <div class="import-duelystcards-deck-modal">
       <h1>Import Duelystcards Deck</h1>
       <p>Paste the URL of the deck you want to import. The deck must contain a general for successful import.</p>
       <p v-if="error">There was an issue importing the deck. Please make sure the URL is correct and that the exported deck has a general.</p>
@@ -73,7 +73,7 @@ export default {
 <style lang="sass">
   @import '../css/includes';
 
-  .import-deck-modal {
+  .import-duelystcards-deck-modal {
     padding: 30px;
 
     > .input {
