@@ -2,10 +2,10 @@
   <div class="import-export-button button" tabindex="1" ref="button">
     <i class="icon icon-upload" data-tooltip="Import/Export Deck" data-position="bottom left"></i>
     <div class="menu">
-      <div class="option" @click="$store.dispatch('app/toggleProperty', 'importDeck')">Duelystcards Import</div>
-      <div class="option" @click="handleSaveToImgur('horizontal')">Duelystcards Export</div>
-      <div class="option" @click="handleSaveToComputer('vertical')">Duelyst Import</div>
-      <div class="option" @click="handleSaveToImgur('vertical')">Duelyst Export</div>
+      <div class="option" @click="$store.dispatch('app/toggleProperty', 'importDuelystcardsDeck')">Duelystcards Import</div>
+      <div class="option" @click="$store.dispatch('app/toggleProperty', 'exportDuelystcardsDeck')">Duelystcards Export</div>
+      <div class="option" @click="$store.dispatch('app/toggleProperty', 'importDuelystDeck')">Duelyst Import</div>
+      <div class="option" @click="$store.dispatch('app/toggleProperty', 'exportDuelystDeck')">Duelyst Export</div>
     </div>
   </div>
 </template>
@@ -16,16 +16,7 @@ import { mapGetters, mapState } from 'vuex';
 export default {
   computed: {},
 
-  methods: {
-    // handleSaveToComputer(type) {
-    //   saveToComputer(type, this.currentFaction);
-    //   this.$refs.button.blur();
-    // },
-    // handleSaveToImgur(type) {
-    //   saveToImgur(type);
-    //   this.$refs.button.blur();
-    // }
-  }
+  methods: {}
 };
 </script>
 
