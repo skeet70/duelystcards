@@ -26,14 +26,16 @@ export const updateHash = ({ general, cards, sideboard = [] }) => {
 export const duelystToDuelystCardsHash = (duelystHash) => {
   let hash = duelystHash;
   hash = hash.replace(/\[(.*?)\]/, '');
-  const cardArray = hash.split(',').map((cardEntry) => {
-    const tuple = cardEntry.split(':');
+  const cardArray = atob(hash)
+    .split(',')
+    .map((cardEntry) => {
+      const tuple = cardEntry.split(':');
 
-    tuple[2] = tuple[1];
-    tuple[1] = 'mainboard';
+      tuple[2] = tuple[1];
+      tuple[1] = 'mainboard';
 
-    return tuple.join(':');
-  });
+      return tuple.join(':');
+    });
 
   // change the general type. It's always the first one in the array.
   const generalTuple = cardArray[0].split(':');
@@ -43,7 +45,8 @@ export const duelystToDuelystCardsHash = (duelystHash) => {
   return btoa(cardArray.join(','));
 };
 
-export const duelystCardsToDuelystHash = duelystCardsHash => btoa(
+export const duelystCardsToDuelystHash = duelystCardsHash =>
+  btoa(
     atob(duelystCardsHash)
       .split(',')
       .filter(s => !/sideboard/.test(s))
